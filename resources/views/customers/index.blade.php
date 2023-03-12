@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="modal fade" id="importProductModal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    <div class="modal fade" id="importCustomersModel" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white-all">
@@ -46,6 +46,48 @@
         </div>
     </div>
 
+    <div class="modal fade" id="exportCustomersModel" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white-all">
+                    <h5 class="modal-title" id="formModal">Import Products</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" role="form" action="{{route('customers.import')}}" class="needs-validation"
+                        enctype="multipart/form-data" id="formImportProduct">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="name">File(Only CSV) <span
+                                                class="text-danger">*</span></label>
+                                       
+                  <div class="col-sm-6" style="padding-left: 0;"><input type="file" name="target_excel" placeholder="Upload File" required></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h6 class="text-warning"><i class="fa fa-info-circle"></i> Note * mark fields are
+                                        required</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btnSubmit"><i class="fa fa-plus"></i>
+                                Add
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="section">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-dark text-white-all">
@@ -55,13 +97,18 @@
                 <li class="breadcrumb-item"><a href="{{route('customers.create')}}"><i class="fas fa-plus"></i> Add
                         Customer</a></li>
                 <li class="breadcrumb-item">
-                    <a href="#importProductModal" data-toggle="modal" data-target="#importProductModal">
-                        <i class="fas fa-plus"></i> Import Customer
+                    <a href="#importCustomersModel" data-toggle="modal" data-target="#importCustomersModel">
+                        <i class="fas fa-plus"></i> Import Customers
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ asset('assets/excel/sample_product_excel.xlsx') }}" download="">
+                    <a href="{{ asset('excel/sample_customers_excel.xlsx') }}" download="">
                         <i class="fas fa-download"></i> Download Sample Excel
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#exportCustomersModel" data-toggle="modal" data-target="#exportCustomersModel">
+                        <i class="fas fa-plus"></i> Export Customers
                     </a>
                 </li>
             </ol>
