@@ -64,6 +64,11 @@
         </style>
     </head>
     <body>
+      <form action="{{route('customers.import')}}" enctype="multipart/form-data" method="POST">
+                  {{csrf_field()}}
+                  <div class="col-sm-6" style="padding-left: 0;"><input type="file" name="target_excel" placeholder="Upload File" required></div>
+                  <div class="col-sm-6" style="padding-left: 0;"><button type="submit" class="btn btn-primary">Upload Excel</button></div>
+                </form>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
