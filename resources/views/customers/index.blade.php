@@ -3,17 +3,18 @@
 @section('content')
 
 
-    <div class="modal fade" id="importCustomersModel" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    <div class="modal fade" id="importCustomersModel" tabindex="-1" role="dialog" aria-labelledby="formModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white-all">
-                    <h5 class="modal-title" id="formModal">Import Products</h5>
+                    <h5 class="modal-title" id="formModal">Import Customers</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" role="form" action="{{route('customers.import')}}" class="needs-validation"
+                    <form method="POST" role="form" action="{{ route('customers.import') }}" class="needs-validation"
                         enctype="multipart/form-data" id="formImportProduct">
                         @csrf
                         <div class="modal-body">
@@ -21,10 +22,10 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="name">File(Only CSV) <span
-                                                class="text-danger">*</span></label>
-                                       
-                  <div class="col-sm-6" style="padding-left: 0;"><input type="file" name="target_excel" placeholder="Upload File" required></div>
+                                        <label for="name">File(Only CSV) <span class="text-danger">*</span></label>
+
+                                        <div class="col-sm-6" style="padding-left: 0;"><input type="file"
+                                                name="target_excel" placeholder="Upload File" required></div>
 
                                     </div>
                                 </div>
@@ -46,17 +47,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exportCustomersModel" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    {{-- <div class="modal fade" id="exportCustomersModel" tabindex="-1" role="dialog" aria-labelledby="formModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white-all">
-                    <h5 class="modal-title" id="formModal">Import Products</h5>
+                    <h5 class="modal-title" id="formModal">Export Customers</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" role="form" action="{{route('customers.import')}}" class="needs-validation"
+                    <form method="POST" role="form" action="{{ route('customers.export') }}" class="needs-validation"
                         enctype="multipart/form-data" id="formImportProduct">
                         @csrf
                         <div class="modal-body">
@@ -64,10 +66,10 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="name">File(Only CSV) <span
-                                                class="text-danger">*</span></label>
-                                       
-                  <div class="col-sm-6" style="padding-left: 0;"><input type="file" name="target_excel" placeholder="Upload File" required></div>
+                                        <label for="name">File(Only CSV) <span class="text-danger">*</span></label>
+
+                                        <div class="col-sm-6" style="padding-left: 0;"><input type="file"
+                                                name="target_excel" placeholder="Upload File" required></div>
 
                                     </div>
                                 </div>
@@ -87,14 +89,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <section class="section">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-dark text-white-all">
                 <li class="breadcrumb-item"><a href="{{ route('customers.index') }}"><i class="fas fa-home"></i>
                         Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Customers</li>
-                <li class="breadcrumb-item"><a href="{{route('customers.create')}}"><i class="fas fa-plus"></i> Add
+                <li class="breadcrumb-item"><a href="{{ route('customers.create') }}"><i class="fas fa-plus"></i> Add
                         Customer</a></li>
                 <li class="breadcrumb-item">
                     <a href="#importCustomersModel" data-toggle="modal" data-target="#importCustomersModel">
@@ -106,25 +108,39 @@
                         <i class="fas fa-download"></i> Download Sample Excel
                     </a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a href="#exportCustomersModel" data-toggle="modal" data-target="#exportCustomersModel">
+                {{-- <li class="breadcrumb-item">
+                    <a href="{{route('customers.export')}}" >
+                        <i class="fas fa-download"></i> Export Customers Excel
+                    </a>
+                </li> --}}
+                {{-- <li class="breadcrumb-item">
+                    <a href="{{route('customers.export')}} data-toggle="modal" data-target="#exportCustomersModel">
                         <i class="fas fa-plus"></i> Export Customers
                     </a>
-                </li>
+                </li> --}}
             </ol>
         </nav>
         <div class="card">
+            
             <div class="card-header bg-dark text-white-all">
                 <h4>Manage Customers</h4>
+                
+                <form action="{{route('customers.export')}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary btnSubmit">
+                        <i class="fa fa-file-excel-o"></i> Export Excel
+                    </button>
+                </form>
             </div>
             @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $e)  {{--  <----- $errors->all() --}}
-                        <li><strong>{{ $e }}</strong></li>
-                    @endforeach
-                </ul>
-            </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $e)
+                            {{--  <----- $errors->all() --}}
+                            <li><strong>{{ $e }}</strong></li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
             <div class="card-body">
@@ -133,9 +149,9 @@
                         <span class="close" onclick="this.parentElement.style.display='none';"
                             style="cursor: pointer;">&times;</span>
                         {{-- @foreach ($errors->all() as $error) --}}
-                            <li>
-                                <span class="text-white">{{Session::get('success')}}</span>
-                            </li>
+                        <li>
+                            <span class="text-white">{{ Session::get('success') }}</span>
+                        </li>
                         {{-- @endforeach --}}
                     </div>
                 @endif
@@ -158,13 +174,13 @@
                             @forelse ($customers as $customer)
                                 <tr>
                                     <td>{{ $customer->id }}</td>
-                                   <td>{{$customer->name}}</td>
-                                   <th>{{$customer->mobile}}</th>
-                                    <td>{{$customer->email}}</td>
-                                    <td>{{$customer->gender}}</td>
-                                    <td>{{$customer->is_married==1?'Yes':'No'}}</td>
+                                    <td>{{ $customer->name }}</td>
+                                    <th>{{ $customer->mobile }}</th>
+                                    <td>{{ $customer->email }}</td>
+                                    <td>{{ $customer->gender }}</td>
+                                    <td>{{ $customer->is_married == 1 ? 'Yes' : 'No' }}</td>
 
-                                   
+
                                     <td>
                                         {{ $customer->status == true ? 'Active' : 'Blocked' }}
                                     </td>
@@ -177,14 +193,15 @@
                                                 Action
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a href="{{route('customers.edit',$customer->id)}}" class="dropdown-item has-icon" title="Edit Detail">
+                                                <a href="{{ route('customers.edit', $customer->id) }}"
+                                                    class="dropdown-item has-icon" title="Edit Detail">
                                                     <i class="fa fa-edit"></i> Edit
                                                 </a>
                                                 <a href="javascript:void(0)" data-role="delete-obj"
-                                            data-obj-id="{{ $customer->id }}" class="dropdown-item has-icon delete-object"
-                                            title="Delete Slider">
-                                            <i class="fa fa-trash text-danger"></i> Delete
-                                        </a>
+                                                    data-obj-id="{{ $customer->id }}"
+                                                    class="dropdown-item has-icon delete-object" title="Delete Slider">
+                                                    <i class="fa fa-trash text-danger"></i> Delete
+                                                </a>
                                             </div>
                                         </div>
                                     </td>
@@ -214,7 +231,7 @@
                 </div>
             </div>
         </div>
-        <form id="formDelete" method="POST" action="{{route('customer.delete')}}">
+        <form id="formDelete" method="POST" action="{{ route('customer.delete') }}">
             @csrf
             <input type="hidden" name="customer_id" id="customer_id">
         </form>
@@ -227,14 +244,14 @@
                 //         $(".alert").fadeOut("fast");
                 //     }
                 // }, 3000)
-                $(".delete-object").click(function () {
-            if (window.confirm("Are you sure, You want to Delete ? ")) {
-                $("#customer_id").val($(this).attr("data-obj-id"));
-                $(this).attr('disabled', 'disabled');
-                $(this).html('<span class="fa fa-spinner fa-spin"></span> Loading...');
-                $("#formDelete").submit();
-            }
-        });
+                $(".delete-object").click(function() {
+                    if (window.confirm("Are you sure, You want to Delete ? ")) {
+                        $("#customer_id").val($(this).attr("data-obj-id"));
+                        $(this).attr('disabled', 'disabled');
+                        $(this).html('<span class="fa fa-spinner fa-spin"></span> Loading...');
+                        $("#formDelete").submit();
+                    }
+                });
 
             });
         </script>

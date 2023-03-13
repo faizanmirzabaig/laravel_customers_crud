@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'CustomerController@welcome');
-Route::post('/products/import', 'CustomerController@import_excel')->name('customers.import');
+Route::post('/customers/import', 'CustomerController@import_excel')->name('customers.import');
+Route::post('/customers/export', 'CustomerController@export_excel')->name('customers.export');
 Route::prefix('/manage-customers')->group(function () {
     Route::get('/index', 'CustomerController@index')->name('customers.index');
     Route::get('/create','CustomerController@create')->name('customers.create');

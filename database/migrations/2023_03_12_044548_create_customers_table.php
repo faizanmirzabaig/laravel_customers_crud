@@ -13,16 +13,16 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100);
-            $table->bigInteger('mobile')->unique();
-            $table->string('email', 100)->nullable();
-            $table->string('gender', 10);
-            $table->boolean('is_married')->default(false);
-            $table->boolean('status')->default(false);
-            $table->timestamps();
-        });
+        // Schema::create('customers', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name', 100);
+        //     $table->bigInteger('mobile')->unique();
+        //     $table->string('email', 100)->nullable();
+        //     $table->string('gender', 10);
+        //     $table->boolean('is_married')->default(false);
+        //     $table->boolean('status')->default(false);
+        //     $table->timestamps();
+        // });
     }
 
     /**

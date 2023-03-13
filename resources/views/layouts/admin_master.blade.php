@@ -71,7 +71,7 @@
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
                         <a href="">
-                            <img alt="image" src="{!! asset('assets/image/logo/logo.png') !!}" class="header-logo" />
+                            <img alt="image" src="{!! asset('logo.png') !!}" class="header-logo" />
                             {{-- <span class="logo-name">Vardhra Shoes</span> --}}
                         </a>
                     </div>

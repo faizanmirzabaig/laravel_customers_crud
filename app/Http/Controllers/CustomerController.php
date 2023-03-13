@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Imports\CustomersImport;
 use App\Customer;
+use App\Exports\CustomersExport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Excel;
-
+use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
@@ -18,7 +19,11 @@ class CustomerController extends Controller
     public function import_excel()
     {
         Excel::import(new CustomersImport(), request()->file('target_excel'));
-        return redirect()->route('customers.index')->with('success', 'Customers have been Addded Sucessfully  !!!.');
+        return redirect()->route('customers.index')->with('success', 'Customers have been Addded Sucessfully!!!.');
+    }
+    public function export_excel(){
+        Log::info(['$paramList' => 'asdasdasd']);
+        return Excel::download(new CustomersExport, 'Remaining Customers' . \Carbon\Carbon::parse(now())->format('d_m_Y_h_i_s') . '.xlsx');
     }
     public function index()
     {
